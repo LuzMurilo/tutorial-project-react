@@ -1,0 +1,8 @@
+.star-rating-container {
+    width: auto;
+    padding: 32px;
+}
+
+.star-active {
+    color: gold;
+}
