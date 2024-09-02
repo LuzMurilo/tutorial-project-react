@@ -1,0 +1,12 @@
+.random-color-container{
+    width: 500px;
+    min-height: 200px;
+    padding: 10px;
+}
+
+.random-color-container .button-container {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    gap: 10px;
+}

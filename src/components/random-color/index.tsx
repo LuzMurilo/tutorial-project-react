@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "./styles.css"
 
 const RandomColor = () => {
     const [color, setColor] = useState("#FFFFFF");
@@ -24,17 +25,13 @@ const RandomColor = () => {
         setColor(hex);
         return;
     }
+
     return (
-        <div style={
-            {
-                width: "500px",
-                minHeight: "200px",
-                backgroundColor: color,
-                justifyContent: "space-around"
-            }
-        }>
-            <button onClick={() => HandleGenerateColor("rgb")}>Generate RGB Color</button>
-            <button onClick={() => HandleGenerateColor("hex")}>Generate HEX Color</button>
+        <div className="random-color-container" style={{backgroundColor: color}}>
+            <div className="button-container">
+                <button onClick={() => HandleGenerateColor("rgb")}>Generate RGB Color</button>
+                <button onClick={() => HandleGenerateColor("hex")}>Generate HEX Color</button>
+            </div>
             <h1>{color}</h1>
         </div>
     )
