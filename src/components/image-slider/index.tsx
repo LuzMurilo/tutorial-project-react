@@ -42,11 +42,17 @@ function ImageSlider({ url, page = 1, limit = 5 }: ImageSliderProps) {
     }
   }
 
+  function handlePrevious() {
+    setCurrentSlide(currentSlide === 0 ? images.length-1 : currentSlide-1);
+  }
+
+  function handleNext() {
+    setCurrentSlide(currentSlide === images.length-1 ? 0 : currentSlide+1);
+  }
+
   useEffect(() => {
     if (url !== "") fetchImages(url);
   }, [url]);
-
-  console.log(images);
 
   if (loading) {
     return <div>Loading images...</div>;
@@ -61,18 +67,29 @@ function ImageSlider({ url, page = 1, limit = 5 }: ImageSliderProps) {
   }
 
   return <div className="slider-container">
-    <BsArrowLeftCircleFill className="arrow arrow-left" />
+    <BsArrowLeftCircleFill className="arrow arrow-left" onClick={handlePrevious}/>
     {
-        images.map((imageItem) => {
-            return <img 
+        images.map((imageItem, index) => 
+            <img 
             key={imageItem.id}
             alt={imageItem.download_url}
             src={imageItem.download_url}
-            className="current-image"
+            className={currentSlide === index ? "image" : "image image-hidden"}
             />
-        })
+        )
     }
-    <BsArrowRightCircleFill className="arrow arrow-right" />
+    <BsArrowRightCircleFill className="arrow arrow-right" onClick={handleNext}/>
+    <span className="container-indicators">
+      {
+        images.map((_,index) => 
+          <button 
+            key={index} 
+            className={currentSlide === index ? "indicator" : "indicator inactive-indicator"}
+            onClick={() => setCurrentSlide(index)}>
+          </button>
+      )
+      }
+    </span>
   </div>;
 }
 
